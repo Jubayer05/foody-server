@@ -4,15 +4,18 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
+const postFoodRouter = require('./routes/postFoodRouter.js');
 const foodRouter = require('./routes/foodRouter.js');
 
 const app = express();
 
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/foodItems', foodRouter);
+app.use('/foodItems', postFoodRouter);
+app.use('/', foodRouter);
 
 const CONNECTION_URL = `mongodb+srv://${process.env.FOODY_USERNAME}:${process.env.PASSWORD}@cluster0.f3cn5.mongodb.net/foodItems?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 5000;

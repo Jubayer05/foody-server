@@ -1,8 +1,7 @@
 const express = require('express');
-const { setFoodItem } = require('../controller/foodController');
-
+const { getFoodItems } = require('../controller/foodController.js');
 const router = express.Router();
 
-router.post('/', setFoodItem);
+router.get('/', getFoodItems);
 
 module.exports = router;

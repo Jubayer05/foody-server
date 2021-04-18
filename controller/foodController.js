@@ -1,19 +1,10 @@
 const mongoose = require('mongoose');
 const FoodItems = require('../models/FoodItem.js');
 
-exports.setFoodItem = async (req, res) => {
-  const foodData = req.body;
-  const newFoodItem = new FoodItems({
-    ...foodData,
-    createdAt: new Date().toDateString(),
-  });
+exports.getFoodItems = async (req, res) => {
   try {
-    await newFoodItem.save().then((result) => {
-      res.status(201).json({
-        message: 'Food Item created successfully',
-        createdFood: { newFoodItem },
-      });
-    });
+    const allFoodItems = await FoodItems.find();
+    res.status(200).send(allFoodItems);
   } catch (error) {
     console.log(error);
   }
