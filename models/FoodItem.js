@@ -5,6 +5,7 @@ const foodItemSchema = mongoose.Schema({
   description: String,
   price: Number,
   foodImage: String,
+  quantity: { type: Number, default: 1 },
   createdAt: {
     type: Date,
     default: new Date(),
