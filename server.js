@@ -6,6 +6,8 @@ require('dotenv').config();
 
 const foodRouter = require('./routes/foodRouter.js');
 const orderRouter = require('./routes/orderRouter.js');
+const userRouter = require('./routes/userRouter.js');
+const adminRouter = require('./routes/adminRouter.js');
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(bodyParser.json());
 
 app.use('/foodItems', foodRouter);
 app.use('/order', orderRouter);
+app.use('/user', userRouter);
+app.use('/admin', adminRouter);
 
 const CONNECTION_URL = `mongodb+srv://${process.env.FOODY_USERNAME}:${process.env.PASSWORD}@cluster0.f3cn5.mongodb.net/foody?retryWrites=true&w=majority`;
 const PORT = process.env.PORT || 5000;
@@ -24,6 +28,7 @@ mongoose
   .connect(CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
   })
   .then(() => {
     app.listen(PORT, () => {
@@ -33,9 +38,5 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-// app.get('/', (req, res) => {
-//   res.send('Hello Jubayer, Welcome to Foody from backend');
-// });
 
 mongoose.set('useFindAndModify', false);
