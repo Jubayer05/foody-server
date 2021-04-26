@@ -4,7 +4,8 @@
   "description": "This is the server site of foody ",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "start:prod": "nodemon server.js"
   },
   "author": "Jubayer Ahmed",
   "license": "ISC",
